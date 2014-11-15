@@ -1,0 +1,30 @@
+## Stuff to be ignored by GitHub/Git
+
+## WIP Source
+/src/main/java/com/lewismcreu/wizardworld/wip
+
+## Gradle Stuff
+/.gradle
+/build
+/gradle
+/gradlew
+/gradlew.bat
+
+## Eclipse Stuff
+/.settings
+/.metadata
+/.classpath
+/.project
+/bin
+/eclipse
+
+## Minecraft Stuff
+/asm
+/config
+/crash-reports
+/logs
+/mods
+/options.txt
+/resourcepacks
+/screenshots
+/saves

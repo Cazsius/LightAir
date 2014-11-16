@@ -4,7 +4,7 @@ import com.lewismcreu.lightair.BlockAirLight;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class CommonProxy implements IProxy
+public abstract class CommonProxy implements IProxy
 {
 	public static final BlockAirLight blockAirLight = new BlockAirLight();
 	

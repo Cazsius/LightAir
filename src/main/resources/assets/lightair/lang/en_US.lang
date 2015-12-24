@@ -1,1 +1,10 @@
+<<<<<<< HEAD
 tile.lightair:blockAirLight.name=Light Air
+=======
+# Light Air block
+tile.lightair:blockAirLight.name=Light Air
+
+# Keybinding
+keys.lightair.category=Light Air
+keys.lightair.togglevis=Toggle Light Air visibility
+>>>>>>> origin/master

@@ -1,5 +1,6 @@
 package com.lewismcreu.lightair;
 
+import com.lewismcreu.lightair.proxy.ClientProxy;
 import com.lewismcreu.lightair.proxy.CommonProxy;
 import com.lewismcreu.lightair.proxy.IProxy;
 
@@ -27,6 +28,12 @@ public class LightAir
 	{
 		// Initialize CommonProxy
 		CommonProxy.init();
+		// Initialize ClientProxy
+		ClientProxy.init();
+		// Initialize KeyBindings
+		proxy.registerKeyBindings();
+		// Register EventHandler - keys and events
+		FMLCommonHandler.instance().bus().register(new EventHandler());
 	}
 
 	// Initialization events
@@ -42,4 +49,8 @@ public class LightAir
 	{
 
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 }

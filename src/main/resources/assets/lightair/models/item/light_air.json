@@ -1,7 +1,7 @@
 {
     "parent":"builtin/generated",
     "textures": {
-        "layer0":"arkcraft:items/light_air"
+        "layer0":"lightair:items/light_air_new"
     },
     "display": {
         "thirdperson": {

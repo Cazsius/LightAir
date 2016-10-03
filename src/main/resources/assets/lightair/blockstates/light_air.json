@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"normal": {
+			"model": ""
+		},
+		"inventory": {
+			"model": "lightair:light_air"
+		}
+	}
+}

@@ -3,6 +3,8 @@ package com.lewismcreu.lightair;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = LightAir.MOD_ID, name = LightAir.MOD_NAME, version = LightAir.MOD_VERSION)
 public class LightAir
@@ -14,12 +16,18 @@ public class LightAir
 	@Mod.Instance("lightair")
 	public static LightAir instance;
 
-	@SidedProxy(clientSide = "com.lewismcreu.lightair.CommonProxy", serverSide = "com.lewismcreu.lightair.CommonProxy")
+	@SidedProxy(clientSide = "com.lewismcreu.lightair.ClientProxy", serverSide = "com.lewismcreu.lightair.CommonProxy")
 	public static CommonProxy proxy;
 
 	@EventHandler
-	public void preInit(net.minecraftforge.fml.common.event.FMLInitializationEvent event)
+	public void preInit(FMLPreInitializationEvent event)
 	{
 		proxy.preInit();
+	}
+
+	@EventHandler
+	public void init(FMLInitializationEvent event)
+	{
+		proxy.init();
 	}
 }

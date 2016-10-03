@@ -2,7 +2,7 @@ package com.lewismcreu.lightair;
 
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public abstract class CommonProxy
+public class CommonProxy
 {
 	public static final BlockAirLight blockAirLight = new BlockAirLight();
 
@@ -10,4 +10,7 @@ public abstract class CommonProxy
 	{
 		GameRegistry.register(blockAirLight);
 	}
+
+	public void init()
+	{}
 }

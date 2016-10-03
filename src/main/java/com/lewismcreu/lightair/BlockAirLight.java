@@ -1,12 +1,21 @@
 package com.lewismcreu.lightair;
 
+import java.util.List;
+
 import net.minecraft.block.BlockAir;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 public class BlockAirLight extends BlockAir
 {
@@ -17,8 +26,38 @@ public class BlockAirLight extends BlockAir
 		super();
 		setUnlocalizedName("light_air");
 		setRegistryName("light_air");
-		this.setCreativeTab(CreativeTabs.MISC);
+		setCreativeTab(CreativeTabs.MISC);
 		setDefaultState(getDefaultState().withProperty(LIGHT_LEVEL, 15));
+		setResistance(6000001.0F);
+		disableStats();
+		translucent = true;
+	}
+
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
+	{
+		tooltip.add(I18n.translateToLocalFormatted("lightair.tooltip.lightlevel", stack.getMetadata()));
+	}
+
+	@Override
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
+			EntityPlayer player)
+	{
+		ItemStack is = new ItemStack(this);
+		is.setItemDamage(state.getValue(LIGHT_LEVEL));
+		return is;
+	}
+
+	@Override
+	public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
+	{
+		for (int i = 0; i < 16; i++)
+		{
+			ItemStack is = new ItemStack(itemIn);
+			is.setItemDamage(i);
+			list.add(is);
+		}
+		super.getSubBlocks(itemIn, tab, list);
 	}
 
 	@Override
@@ -42,11 +81,7 @@ public class BlockAirLight extends BlockAir
 	@Override
 	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos)
 	{
+		System.out.println(state.getValue(LIGHT_LEVEL));
 		return state.getValue(LIGHT_LEVEL);
-	}
-
-	public String getUnwrappedUnlocalizedName()
-	{
-		return getUnlocalizedName().substring(getUnlocalizedName().indexOf(".") + 1);
 	}
 }

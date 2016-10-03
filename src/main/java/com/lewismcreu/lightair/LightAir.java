@@ -23,17 +23,6 @@ public class LightAir
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		proxy.preInit();
-		getUnlocalizedName("light_air");
-		getRegistryName("light_air");
-	}
-
-	private void getRegistryName(String string) {
-		
-	}
-
-	private void getUnlocalizedName(String string) {
-
-		
 	}
 
 	@EventHandler

@@ -11,7 +11,6 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void init()
 	{
-		System.out.println("do this");
 		super.init();
 		Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().registerBlockWithStateMapper(
 				blockAirLight, new StateMap.Builder().ignore(BlockAirLight.LIGHT_LEVEL).build());

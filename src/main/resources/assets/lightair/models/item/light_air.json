@@ -1,7 +1,7 @@
 {
     "parent":"builtin/generated",
     "textures": {
-        "layer0":"lightair:items/light_air_new"
+        "layer0":"lightair:items/light_air"
     },
     "display": {
         "thirdperson": {

@@ -40,17 +40,9 @@ public class BlockAirLight extends BlockAir
 	}
 
 	@Override
-	public int getLightValue(IBlockState state)
-	{
-		// TODO Auto-generated method stub
-		return super.getLightValue(state);
-	}
-
-	@Override
 	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos)
 	{
-		// TODO Auto-generated method stub
-		return super.getLightValue(state, world, pos);
+		return state.getValue(LIGHT_LEVEL);
 	}
 
 	public String getUnwrappedUnlocalizedName()

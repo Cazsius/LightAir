@@ -10,7 +10,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.translation.I18n;
@@ -81,7 +80,6 @@ public class BlockAirLight extends BlockAir
 	@Override
 	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos)
 	{
-		System.out.println(state.getValue(LIGHT_LEVEL));
 		return state.getValue(LIGHT_LEVEL);
 	}
 }

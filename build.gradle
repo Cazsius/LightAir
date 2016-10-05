@@ -20,8 +20,15 @@ plugins {
     id "net.minecraftforge.gradle.forge" version "2.0.2"
 }
 */
+
+
+apply plugin: 'java'
+
+sourceCompatibility=1.8
+targetCompatibility=1.8
+
 version = "1.0"
-group= "com.lewismcre.lightair" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group= "com.lewismcreu.lightair" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "lightair"
 
 minecraft {

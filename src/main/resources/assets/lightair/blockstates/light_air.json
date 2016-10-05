@@ -1,7 +1,7 @@
 {
 	"variants": {
 		"normal": {
-			"model": "lightair:lightair"
+			"model": "lightair:light_air"
 		}
 	}
 }

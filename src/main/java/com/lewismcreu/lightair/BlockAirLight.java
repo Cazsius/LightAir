@@ -46,7 +46,8 @@ public class BlockAirLight extends BlockAir
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
 	{
-		tooltip.add(I18n.translateToLocalFormatted("lightair.tooltip.lightlevel", stack.getMetadata()));
+		if (stack.getMetadata() > 0) tooltip.add(I18n.translateToLocalFormatted("lightair.tooltip.lightlevel", stack
+				.getMetadata()));
 	}
 
 	@Override
@@ -67,7 +68,6 @@ public class BlockAirLight extends BlockAir
 			is.setItemDamage(i);
 			list.add(is);
 		}
-		super.getSubBlocks(itemIn, tab, list);
 	}
 
 	@Override

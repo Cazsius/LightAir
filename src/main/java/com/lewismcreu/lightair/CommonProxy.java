@@ -49,6 +49,10 @@ public class CommonProxy
 		GameRegistry.addShapelessRecipe(new ItemStack(glowstoneBit, 4), new ItemStack(Items.GLOWSTONE_DUST));
 		GameRegistry.addRecipe(new ShapedRecipes(2, 2, new ItemStack[] { new ItemStack(coalDust), new ItemStack(
 				coalDust), new ItemStack(coalDust), new ItemStack(coalDust) }, new ItemStack(Items.COAL)));
+		GameRegistry.addRecipe(new ShapedRecipes(2, 2, new ItemStack[] { new ItemStack(coalBit), new ItemStack(
+				coalBit), new ItemStack(coalBit), new ItemStack(coalBit) }, new ItemStack(coalDust)));
+		GameRegistry.addRecipe(new ShapedRecipes(2, 2, new ItemStack[] { new ItemStack(glowstoneBit), new ItemStack(
+				glowstoneBit), new ItemStack(glowstoneBit), new ItemStack(glowstoneBit) }, new ItemStack(Items.GLOWSTONE_DUST)));
 		GameRegistry.addRecipe(new IRecipe()
 		{
 			@Override

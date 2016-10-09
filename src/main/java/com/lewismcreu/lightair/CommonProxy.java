@@ -49,10 +49,11 @@ public class CommonProxy
 		GameRegistry.addShapelessRecipe(new ItemStack(glowstoneBit, 4), new ItemStack(Items.GLOWSTONE_DUST));
 		GameRegistry.addRecipe(new ShapedRecipes(2, 2, new ItemStack[] { new ItemStack(coalDust), new ItemStack(
 				coalDust), new ItemStack(coalDust), new ItemStack(coalDust) }, new ItemStack(Items.COAL)));
-		GameRegistry.addRecipe(new ShapedRecipes(2, 2, new ItemStack[] { new ItemStack(coalBit), new ItemStack(
-				coalBit), new ItemStack(coalBit), new ItemStack(coalBit) }, new ItemStack(coalDust)));
+		GameRegistry.addRecipe(new ShapedRecipes(2, 2, new ItemStack[] { new ItemStack(coalBit), new ItemStack(coalBit),
+				new ItemStack(coalBit), new ItemStack(coalBit) }, new ItemStack(coalDust)));
 		GameRegistry.addRecipe(new ShapedRecipes(2, 2, new ItemStack[] { new ItemStack(glowstoneBit), new ItemStack(
-				glowstoneBit), new ItemStack(glowstoneBit), new ItemStack(glowstoneBit) }, new ItemStack(Items.GLOWSTONE_DUST)));
+				glowstoneBit), new ItemStack(glowstoneBit), new ItemStack(glowstoneBit) }, new ItemStack(
+						Items.GLOWSTONE_DUST)));
 		GameRegistry.addRecipe(new IRecipe()
 		{
 			@Override
@@ -129,19 +130,19 @@ public class CommonProxy
 			@Override
 			public ItemStack[] getRemainingItems(InventoryCrafting inv)
 			{
-				ItemStack[] out = new ItemStack[inv.getSizeInventory()];
-				for (int i = 0; i < inv.getSizeInventory(); i++)
-				{
-					out[i] = inv.getStackInSlot(i);
-					if (out[i] != null)
-					{
-						System.out.println(out[i].stackSize);
-						out[i].stackSize--;
-						if (out[i].stackSize <= 0) out[i] = null;
-					}
-				}
-
-				return out;
+				return new ItemStack[inv.getSizeInventory()];
+				// Old implementation: didn't work!
+				// ItemStack[] out = new ItemStack[inv.getSizeInventory()];
+				// for (int i = 0; i < inv.getSizeInventory(); i++)
+				// {
+				// out[i] = inv.getStackInSlot(i) == null ? null : inv.getStackInSlot(i).copy();
+				// if (out[i] != null)
+				// {
+				// out[i].stackSize--;
+				// if (out[i].stackSize <= 0) out[i] = null;
+				// }
+				// }
+				// return out;
 			}
 		});
 	}

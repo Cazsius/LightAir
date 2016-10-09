@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -22,6 +23,7 @@ public class ClientProxy extends CommonProxy
 	public void init()
 	{
 		super.init();
+		MinecraftForge.EVENT_BUS.register(this);
 		Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().registerBlockWithStateMapper(
 				blockAirLight, new StateMap.Builder().ignore(BlockAirLight.LIGHT_LEVEL).build());
 
@@ -32,8 +34,8 @@ public class ClientProxy extends CommonProxy
 				LightAir.MOD_ID + ":coal_dust", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(coalBit, 0, new ModelResourceLocation(
 				LightAir.MOD_ID + ":coal_bit", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(glowstoneBit, 0, new ModelResourceLocation(
-				LightAir.MOD_ID + ":glowstone_bit", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(glowstoneBit, 0,
+				new ModelResourceLocation(LightAir.MOD_ID + ":glowstone_bit", "inventory"));
 	}
 
 	@SubscribeEvent

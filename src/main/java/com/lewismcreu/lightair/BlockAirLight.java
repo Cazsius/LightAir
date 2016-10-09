@@ -13,7 +13,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -51,15 +50,6 @@ public class BlockAirLight extends BlockAir
 	}
 
 	@Override
-	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
-			EntityPlayer player)
-	{
-		ItemStack is = new ItemStack(this);
-		is.setItemDamage(state.getValue(LIGHT_LEVEL));
-		return is;
-	}
-
-	@Override
 	public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
 	{
 		for (int i = 0; i < 16; i++)
@@ -92,5 +82,11 @@ public class BlockAirLight extends BlockAir
 	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos)
 	{
 		return state.getValue(LIGHT_LEVEL);
+	}
+
+	@Override
+	public int damageDropped(IBlockState state)
+	{
+		return getMetaFromState(state);
 	}
 }

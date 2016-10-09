@@ -4,7 +4,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -33,11 +32,10 @@ public class LightAir
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
+		proxy.preInit();
 		channel = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
 		channel.registerMessage(OpenGuiMessage.Handler.class, OpenGuiMessage.class, 0, Side.SERVER);
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
-		proxy.preInit();
-		if (event.getSide().isClient()) MinecraftForge.EVENT_BUS.register(proxy);
 	}
 
 	@EventHandler

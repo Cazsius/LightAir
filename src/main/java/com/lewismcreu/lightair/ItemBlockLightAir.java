@@ -8,6 +8,7 @@ public class ItemBlockLightAir extends ItemBlock
 	public ItemBlockLightAir(BlockAirLight block)
 	{
 		super(block);
+		hasSubtypes = true;
 	}
 
 	@Override

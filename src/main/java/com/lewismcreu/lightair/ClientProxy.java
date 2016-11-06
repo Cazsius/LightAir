@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -16,13 +17,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy
 {
-	private static final KeyBinding openGui = new KeyBinding("key.lightair.opengui", Keyboard.KEY_L,
-			"key.category.lightair");
+	private static KeyBinding openGui;
 
 	@Override
 	public void init()
 	{
 		super.init();
+		openGui = new KeyBinding("key.lightair.opengui", Keyboard.KEY_L, "key.category.lightair");
+		ClientRegistry.registerKeyBinding(openGui);
 		MinecraftForge.EVENT_BUS.register(this);
 		Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().registerBlockWithStateMapper(
 				blockAirLight, new StateMap.Builder().ignore(BlockAirLight.LIGHT_LEVEL).build());

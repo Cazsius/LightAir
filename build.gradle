@@ -27,12 +27,12 @@ apply plugin: 'java'
 sourceCompatibility=1.8
 targetCompatibility=1.8
 
-version = "1.0"
+version = "2.0"
 group= "com.lewismcreu.lightair" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "lightair"
 
 minecraft {
-    version = "1.10.2-12.18.1.2011"
+    version = "1.10.2-12.18.2.2099"
     runDir = "run"
     
     // the mappings can be changed at any time, and must be in the following format.

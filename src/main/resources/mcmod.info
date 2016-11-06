@@ -2,8 +2,8 @@
 {
   "modid": "lightair",
   "name": "LightAir",
-  "description": "LightAir adds a simple block that is invisible that will add light into your game, it is 100% survival + creative friendly and can be customized to all light levels.",
-  "version": "Beta 1.0",
+  "description": "LightAir adds a simple block that is invisible and will add light into the world. It is 100% survival + creative friendly and can be customized to all light levels.",
+  "version": "2.0",
   "mcversion": "1.10.2",
   "url": "https://minecraft.curseforge.com/projects/lightair",
   "updateUrl": "",

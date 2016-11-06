@@ -1,21 +1,26 @@
 package com.lewismcreu.lightair;
 
 import java.util.List;
+import java.util.Random;
 
 import net.minecraft.block.BlockAir;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SuppressWarnings("deprecation")
 public class BlockAirLight extends BlockAir
@@ -88,5 +93,20 @@ public class BlockAirLight extends BlockAir
 	public int damageDropped(IBlockState state)
 	{
 		return getMetaFromState(state);
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
+	{
+		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
+		if (((p.getHeldItemMainhand() != null && p.getHeldItemMainhand().getItem() == Item.getItemFromBlock(
+				CommonProxy.blockAirLight)) || (p.getHeldItemOffhand() != null && p.getHeldItemOffhand()
+						.getItem() == Item.getItemFromBlock(CommonProxy.blockAirLight))))
+		{
+			for (int i = 0; i < 2; i++)
+				worldIn.spawnParticle(EnumParticleTypes.CLOUD, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0,
+						0.00001, 0);
+		}
 	}
 }

@@ -19,10 +19,11 @@ public class CommonProxy
 {
 	public static final BlockAirLight blockAirLight = new BlockAirLight();
 	public static final Item coalDust = new Item().setUnlocalizedName("coal_dust").setRegistryName("coal_dust")
-			.setCreativeTab(CreativeTabs.MATERIALS), coalBit = new Item().setUnlocalizedName("coal_bit")
-					.setRegistryName("coal_bit").setCreativeTab(CreativeTabs.MATERIALS), glowstoneBit = new Item()
-							.setUnlocalizedName("glowstone_bit").setRegistryName("glowstone_bit").setCreativeTab(
-									CreativeTabs.MATERIALS);
+			.setCreativeTab(CreativeTabs.MATERIALS);
+	public static final Item coalBit = new Item().setUnlocalizedName("coal_bit").setRegistryName("coal_bit")
+			.setCreativeTab(CreativeTabs.MATERIALS);
+	public static final Item glowstoneBit = new Item().setUnlocalizedName("glowstone_bit").setRegistryName(
+			"glowstone_bit").setCreativeTab(CreativeTabs.MATERIALS);
 
 	public void preInit()
 	{
@@ -54,6 +55,8 @@ public class CommonProxy
 		GameRegistry.addRecipe(new ShapedRecipes(2, 2, new ItemStack[] { new ItemStack(glowstoneBit), new ItemStack(
 				glowstoneBit), new ItemStack(glowstoneBit), new ItemStack(glowstoneBit) }, new ItemStack(
 						Items.GLOWSTONE_DUST)));
+		GameRegistry.addShapelessRecipe(new ItemStack(blockAirLight), new ItemStack(coalDust), new ItemStack(
+				Items.GLOWSTONE_DUST));
 		GameRegistry.addRecipe(new IRecipe()
 		{
 			@Override

@@ -1,7 +1,11 @@
 package com.lewismcreu.lightair;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.world.World;
 
 public class ItemBlockLightAir extends ItemBlock
 {
@@ -15,6 +19,16 @@ public class ItemBlockLightAir extends ItemBlock
 	public int getMetadata(int damage)
 	{
 		return damage;
+	}
+
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn,
+			EnumHand hand)
+	{
+		if (!worldIn.isRemote) return ActionResult.newResult(onItemUse(itemStackIn, playerIn, worldIn, playerIn
+				.getPosition().offset(playerIn.getHorizontalFacing()).up(), hand, playerIn
+						.getHorizontalFacing(), 0, 0, 0), itemStackIn);
+		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
 	}
 
 	@Override

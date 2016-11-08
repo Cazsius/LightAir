@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
@@ -24,6 +25,14 @@ public class CommonProxy
 			.setCreativeTab(CreativeTabs.MATERIALS);
 	public static final Item glowstoneBit = new Item().setUnlocalizedName("glowstone_bit").setRegistryName(
 			"glowstone_bit").setCreativeTab(CreativeTabs.MATERIALS);
+	
+	public static final CreativeTabs LIGHTAIR = new CreativeTabs( "lightair")
+	{
+	    @Override public Item getTabIconItem() 
+	    {
+	        return Item.getItemFromBlock(blockAirLight);
+	    }
+	};
 
 	public void preInit()
 	{

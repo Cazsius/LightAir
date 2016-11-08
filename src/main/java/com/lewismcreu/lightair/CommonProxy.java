@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
@@ -18,6 +17,15 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class CommonProxy
 {
+	public static final CreativeTabs LIGHTAIR = new CreativeTabs("lightair")
+	{
+		@Override
+		public Item getTabIconItem()
+		{
+			return Item.getItemFromBlock(blockAirLight);
+		}
+	};
+
 	public static final BlockAirLight blockAirLight = new BlockAirLight();
 	public static final Item coalDust = new Item().setUnlocalizedName("coal_dust").setRegistryName("coal_dust")
 			.setCreativeTab(CreativeTabs.MATERIALS);
@@ -25,14 +33,6 @@ public class CommonProxy
 			.setCreativeTab(CreativeTabs.MATERIALS);
 	public static final Item glowstoneBit = new Item().setUnlocalizedName("glowstone_bit").setRegistryName(
 			"glowstone_bit").setCreativeTab(CreativeTabs.MATERIALS);
-	
-	public static final CreativeTabs LIGHTAIR = new CreativeTabs( "lightair")
-	{
-	    @Override public Item getTabIconItem() 
-	    {
-	        return Item.getItemFromBlock(blockAirLight);
-	    }
-	};
 
 	public void preInit()
 	{

@@ -26,8 +26,8 @@ public class ItemBlockLightAir extends ItemBlock
 			EnumHand hand)
 	{
 		if (!worldIn.isRemote) return ActionResult.newResult(onItemUse(itemStackIn, playerIn, worldIn, playerIn
-				.getPosition().offset(playerIn.getHorizontalFacing()).up(), hand, playerIn
-						.getHorizontalFacing(), 0, 0, 0), itemStackIn);
+				.getPosition().offset(playerIn.getHorizontalFacing()).up(), hand, playerIn.getHorizontalFacing(), 0, 0,
+				0), itemStackIn);
 		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
 	}
 

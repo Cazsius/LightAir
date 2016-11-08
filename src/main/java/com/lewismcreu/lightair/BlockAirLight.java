@@ -33,17 +33,12 @@ public class BlockAirLight extends BlockAir
 		setUnlocalizedName("light_air");
 		setRegistryName("light_air");
 		setCreativeTab(CommonProxy.LIGHTAIR);
-		//Not registering in creative tab properly | FAILING
+		// Not registering in creative tab properly | FAILING
 		setDefaultState(getDefaultState().withProperty(LIGHT_LEVEL, 15));
 		setResistance(6000001.0F);
 		disableStats();
 		translucent = true;
 	}
-	
-	
-	
-	
-	
 
 	@Override
 	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ,

@@ -35,7 +35,6 @@ public class BlockAirLight extends BlockAir
 		setUnlocalizedName("light_air");
 		setRegistryName("light_air");
 		setCreativeTab(CommonProxy.LIGHTAIR);
-		// Not registering in creative tab properly | FAILING
 		setDefaultState(getDefaultState().withProperty(LIGHT_LEVEL, 15));
 		setResistance(6000001.0F);
 		disableStats();
@@ -57,6 +56,15 @@ public class BlockAirLight extends BlockAir
 	{
 		if (stack.getMetadata() > 0) tooltip.add(I18n.translateToLocalFormatted(
 				"lightair.tooltip.lightlevel", stack.getMetadata()));
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void func_190948_a(ItemStack stack, EntityPlayer player,
+			List<String> tooltip, boolean advanced)
+	{
+		// TODO when possible, replace with above version again and remove this method
+		addInformation(stack, player, tooltip, advanced);
 	}
 
 	@Override

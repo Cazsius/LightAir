@@ -22,12 +22,15 @@ public class ItemBlockLightAir extends ItemBlock
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn,
-			EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World worldIn,
+			EntityPlayer playerIn, EnumHand hand)
 	{
-		if (!worldIn.isRemote) return ActionResult.newResult(onItemUse(playerIn, worldIn, playerIn
-				.getPosition().offset(playerIn.getHorizontalFacing()).up(), hand, playerIn.getHorizontalFacing(), 0, 0,
-				0), itemStackIn);
+		if (!worldIn.isRemote) return ActionResult.newResult(
+				onItemUse(playerIn, worldIn,
+						playerIn.getPosition()
+								.offset(playerIn.getHorizontalFacing()).up(),
+						hand, playerIn.getHorizontalFacing(), 0, 0, 0),
+				playerIn.getHeldItem(hand));
 		return super.onItemRightClick(worldIn, playerIn, hand);
 	}
 

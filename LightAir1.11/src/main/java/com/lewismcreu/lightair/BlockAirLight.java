@@ -15,6 +15,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.IBlockAccess;
@@ -25,7 +26,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SuppressWarnings("deprecation")
 public class BlockAirLight extends BlockAir
 {
-	public static final PropertyInteger LIGHT_LEVEL = PropertyInteger.create("lightlevel", 0, 15);
+	public static final PropertyInteger LIGHT_LEVEL =
+			PropertyInteger.create("lightlevel", 0, 15);
 
 	public BlockAirLight()
 	{
@@ -41,22 +43,25 @@ public class BlockAirLight extends BlockAir
 	}
 
 	@Override
-	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ,
-			int meta, EntityLivingBase placer)
+	public IBlockState onBlockPlaced(World worldIn, BlockPos pos,
+			EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+			EntityLivingBase placer)
 	{
-		return super.onBlockPlaced(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(LIGHT_LEVEL,
-				meta);
+		return super.onBlockPlaced(worldIn, pos, facing, hitX, hitY, hitZ, meta,
+				placer).withProperty(LIGHT_LEVEL, meta);
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
+	public void addInformation(ItemStack stack, EntityPlayer player,
+			List<String> tooltip, boolean advanced)
 	{
-		if (stack.getMetadata() > 0) tooltip.add(I18n.translateToLocalFormatted("lightair.tooltip.lightlevel", stack
-				.getMetadata()));
+		if (stack.getMetadata() > 0) tooltip.add(I18n.translateToLocalFormatted(
+				"lightair.tooltip.lightlevel", stack.getMetadata()));
 	}
 
 	@Override
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
+	public void getSubBlocks(Item itemIn, CreativeTabs tab,
+			NonNullList<ItemStack> list)
 	{
 		for (int i = 0; i < 16; i++)
 		{
@@ -85,7 +90,8 @@ public class BlockAirLight extends BlockAir
 	}
 
 	@Override
-	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos)
+	public int getLightValue(IBlockState state, IBlockAccess world,
+			BlockPos pos)
 	{
 		return state.getValue(LIGHT_LEVEL);
 	}
@@ -98,16 +104,19 @@ public class BlockAirLight extends BlockAir
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
+	public void randomDisplayTick(IBlockState stateIn, World worldIn,
+			BlockPos pos, Random rand)
 	{
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
-		if (((p.getHeldItemMainhand() != null && p.getHeldItemMainhand().getItem() == Item.getItemFromBlock(
-				CommonProxy.blockAirLight)) || (p.getHeldItemOffhand() != null && p.getHeldItemOffhand()
-						.getItem() == Item.getItemFromBlock(CommonProxy.blockAirLight))))
+		if (((p.getHeldItemMainhand() != null && p.getHeldItemMainhand()
+				.getItem() == Item.getItemFromBlock(CommonProxy.blockAirLight))
+				|| (p.getHeldItemOffhand() != null
+						&& p.getHeldItemOffhand().getItem() == Item
+								.getItemFromBlock(CommonProxy.blockAirLight))))
 		{
 			for (int i = 0; i < 2; i++)
-				worldIn.spawnParticle(EnumParticleTypes.CLOUD, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0,
-						0.00001, 0);
+				worldIn.spawnParticle(EnumParticleTypes.CLOUD, pos.getX() + 0.5,
+						pos.getY() + 0.5, pos.getZ() + 0.5, 0, 0.00001, 0);
 		}
 	}
 }

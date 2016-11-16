@@ -10,6 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -20,9 +21,9 @@ public class CommonProxy
 	public static final CreativeTabs LIGHTAIR = new CreativeTabs("lightair")
 	{
 		@Override
-		public Item getTabIconItem()
+		public ItemStack getTabIconItem()
 		{
-			return Item.getItemFromBlock(blockAirLight);
+			return new ItemStack(Item.getItemFromBlock(blockAirLight));
 		}
 	};
 

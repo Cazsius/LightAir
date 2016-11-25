@@ -156,7 +156,7 @@ public class CommonProxy
 					}
 				}
 				meta += lighter;
-				meta = MathHelper.clamp_int(meta, 0, 15);
+				meta = MathHelper.clamp(meta, 0, 15);
 				out.setItemDamage(meta);
 				return out;
 			}
@@ -177,7 +177,7 @@ public class CommonProxy
 			public NonNullList<ItemStack> getRemainingItems(
 					InventoryCrafting inv)
 			{
-				return NonNullList.func_191196_a();
+				return NonNullList.create();
 				// Old implementation: didn't work!
 				// ItemStack[] out = new ItemStack[inv.getSizeInventory()];
 				// for (int i = 0; i < inv.getSizeInventory(); i++)

@@ -14,6 +14,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
@@ -42,12 +43,20 @@ public class BlockAirLight extends BlockAir
 	}
 
 	@Override
-	public IBlockState onBlockPlaced(World worldIn, BlockPos pos,
-			EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-			EntityLivingBase placer)
+	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state,
+			EntityLivingBase placer, ItemStack stack)
 	{
-		return super.onBlockPlaced(worldIn, pos, facing, hitX, hitY, hitZ, meta,
-				placer).withProperty(LIGHT_LEVEL, meta);
+		// TODO Auto-generated method stub
+		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+	}
+
+	@Override
+	public IBlockState getStateForPlacement(World world, BlockPos pos,
+			EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+			EntityLivingBase placer, EnumHand hand)
+	{
+		return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ,
+				meta, placer, hand).withProperty(LIGHT_LEVEL, meta);
 	}
 
 	@Override
@@ -56,15 +65,6 @@ public class BlockAirLight extends BlockAir
 	{
 		if (stack.getMetadata() > 0) tooltip.add(I18n.translateToLocalFormatted(
 				"lightair.tooltip.lightlevel", stack.getMetadata()));
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void func_190948_a(ItemStack stack, EntityPlayer player,
-			List<String> tooltip, boolean advanced)
-	{
-		// TODO when possible, replace with above version again and remove this method
-		addInformation(stack, player, tooltip, advanced);
 	}
 
 	@Override
@@ -115,7 +115,7 @@ public class BlockAirLight extends BlockAir
 	public void randomDisplayTick(IBlockState stateIn, World worldIn,
 			BlockPos pos, Random rand)
 	{
-		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
+		EntityPlayer p = Minecraft.getMinecraft().player;
 		if (((p.getHeldItemMainhand() != null && p.getHeldItemMainhand()
 				.getItem() == Item.getItemFromBlock(CommonProxy.blockAirLight))
 				|| (p.getHeldItemOffhand() != null

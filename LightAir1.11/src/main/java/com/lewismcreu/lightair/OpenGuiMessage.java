@@ -18,13 +18,15 @@ public class OpenGuiMessage implements IMessage
 	public void toBytes(ByteBuf buf)
 	{}
 
-	public static class Handler implements IMessageHandler<OpenGuiMessage, IMessage>
+	public static class Handler
+			implements IMessageHandler<OpenGuiMessage, IMessage>
 	{
 		@Override
 		public IMessage onMessage(OpenGuiMessage message, MessageContext ctx)
 		{
-			if (ctx.side.isServer()) ctx.getServerHandler().playerEntity.openGui(LightAir.instance, 0, ctx
-					.getServerHandler().playerEntity.worldObj, 0, 0, 0);
+			if (ctx.side.isServer())
+				ctx.getServerHandler().playerEntity.openGui(LightAir.instance,
+						0, ctx.getServerHandler().playerEntity.world, 0, 0, 0);
 
 			return null;
 		}

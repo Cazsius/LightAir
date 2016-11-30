@@ -174,10 +174,9 @@ public class CommonProxy
 			}
 
 			@Override
-			public NonNullList<ItemStack> getRemainingItems(
-					InventoryCrafting inv)
+			public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv)
 			{
-				return NonNullList.create();
+				return NonNullList.func_191196_a();
 				// Old implementation: didn't work!
 				// ItemStack[] out = new ItemStack[inv.getSizeInventory()];
 				// for (int i = 0; i < inv.getSizeInventory(); i++)

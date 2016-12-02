@@ -6,4 +6,7 @@ key.category.lightair=LightAir
 item.coal_dust.name=Coal Dust
 item.glowstone_bit.name=Glowstone Bit
 item.coal_bit.name=Coal Bit
+item.light_bomb.name=Light Bomb
+item.dark_bomb.name=Dark Bomb
 itemGroup.lightair=LightAir
+command.lightup.usage=/lightup

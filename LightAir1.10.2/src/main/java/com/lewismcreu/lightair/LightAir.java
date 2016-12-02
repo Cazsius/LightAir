@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
@@ -45,6 +46,12 @@ public class LightAir
 		proxy.init();
 	}
 
+	@EventHandler
+	public void serverStarting(FMLServerStartingEvent event)
+	{
+		event.registerServerCommand(new CommandLightUp());
+	}
+
 	public class GuiHandler implements IGuiHandler
 	{
 		@Override
@@ -55,7 +62,7 @@ public class LightAir
 			{
 				ItemStack s = player.getHeldItemMainhand();
 				if (s != null && s.getItem() == Item
-						.getItemFromBlock(CommonProxy.blockAirLight))
+						.getItemFromBlock(CommonProxy.blockLightAir))
 					return new ContainerLightAir(s);
 			}
 			return null;
@@ -69,7 +76,7 @@ public class LightAir
 			{
 				ItemStack s = player.getHeldItemMainhand();
 				if (s != null && s.getItem() == Item
-						.getItemFromBlock(CommonProxy.blockAirLight))
+						.getItemFromBlock(CommonProxy.blockLightAir))
 					return new GuiLightAir(new ContainerLightAir(s));
 			}
 			return null;

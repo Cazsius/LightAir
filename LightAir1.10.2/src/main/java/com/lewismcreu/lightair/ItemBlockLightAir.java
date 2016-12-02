@@ -9,10 +9,11 @@ import net.minecraft.world.World;
 
 public class ItemBlockLightAir extends ItemBlock
 {
-	public ItemBlockLightAir(BlockAirLight block)
+	public ItemBlockLightAir(BlockLightAir block)
 	{
 		super(block);
 		hasSubtypes = true;
+		registerItemBlock(block, this);
 	}
 
 	@Override
@@ -22,12 +23,20 @@ public class ItemBlockLightAir extends ItemBlock
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn,
-			EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn,
+			World worldIn, EntityPlayer playerIn, EnumHand hand)
 	{
-		if (!worldIn.isRemote) return ActionResult.newResult(onItemUse(itemStackIn, playerIn, worldIn, playerIn
-				.getPosition().offset(playerIn.getHorizontalFacing()).up(), hand, playerIn.getHorizontalFacing(), 0, 0,
-				0), itemStackIn);
+		if (!worldIn.isRemote)
+			return ActionResult
+					.newResult(
+							onItemUse(itemStackIn, playerIn, worldIn,
+									playerIn.getPosition()
+											.offset(playerIn
+													.getHorizontalFacing())
+											.up(),
+									hand, playerIn.getHorizontalFacing(), 0, 0,
+									0),
+							itemStackIn);
 		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
 	}
 

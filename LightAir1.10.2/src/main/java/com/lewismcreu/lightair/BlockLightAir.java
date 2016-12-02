@@ -23,11 +23,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SuppressWarnings("deprecation")
-public class BlockAirLight extends BlockAir
+public class BlockLightAir extends BlockAir
 {
 	public static final PropertyInteger LIGHT_LEVEL = PropertyInteger.create("lightlevel", 0, 15);
 
-	public BlockAirLight()
+	public BlockLightAir()
 	{
 		super();
 		setUnlocalizedName("light_air");
@@ -102,8 +102,8 @@ public class BlockAirLight extends BlockAir
 	{
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 		if (((p.getHeldItemMainhand() != null && p.getHeldItemMainhand().getItem() == Item.getItemFromBlock(
-				CommonProxy.blockAirLight)) || (p.getHeldItemOffhand() != null && p.getHeldItemOffhand()
-						.getItem() == Item.getItemFromBlock(CommonProxy.blockAirLight))))
+				CommonProxy.blockLightAir)) || (p.getHeldItemOffhand() != null && p.getHeldItemOffhand()
+						.getItem() == Item.getItemFromBlock(CommonProxy.blockLightAir))))
 		{
 			for (int i = 0; i < 2; i++)
 				worldIn.spawnParticle(EnumParticleTypes.CLOUD, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0,

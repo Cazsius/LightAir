@@ -9,10 +9,11 @@ import net.minecraft.world.World;
 
 public class ItemBlockLightAir extends ItemBlock
 {
-	public ItemBlockLightAir(BlockAirLight block)
+	public ItemBlockLightAir(BlockLightAir block)
 	{
 		super(block);
 		hasSubtypes = true;
+		registerItemBlock(block, this);
 	}
 
 	@Override

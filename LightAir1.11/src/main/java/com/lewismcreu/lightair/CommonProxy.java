@@ -23,11 +23,11 @@ public class CommonProxy
 		@Override
 		public ItemStack getTabIconItem()
 		{
-			return new ItemStack(Item.getItemFromBlock(blockAirLight));
+			return new ItemStack(Item.getItemFromBlock(blockLightAir));
 		}
 	};
 
-	public static final BlockAirLight blockAirLight = new BlockAirLight();
+	public static final BlockLightAir blockLightAir = new BlockLightAir();
 	public static final Item coalDust = new Item()
 			.setUnlocalizedName("coal_dust").setRegistryName("coal_dust")
 			.setCreativeTab(CreativeTabs.MATERIALS);
@@ -37,15 +37,19 @@ public class CommonProxy
 			new Item().setUnlocalizedName("glowstone_bit")
 					.setRegistryName("glowstone_bit")
 					.setCreativeTab(CreativeTabs.MATERIALS);
+	public static final Item lightBomb = new ItemLightPouch();
+	public static final Item darkBomb = new ItemDarkBomb();
+	private static Item itemLightAir;
 
 	public void preInit()
 	{
-		GameRegistry.register(blockAirLight);
-		GameRegistry.register(new ItemBlockLightAir(blockAirLight)
-				.setRegistryName(blockAirLight.getRegistryName()));
+		GameRegistry.register(blockLightAir);
+		itemLightAir = new ItemBlockLightAir(blockLightAir);
 		GameRegistry.register(coalDust);
 		GameRegistry.register(coalBit);
 		GameRegistry.register(glowstoneBit);
+		GameRegistry.register(lightBomb);
+		GameRegistry.register(darkBomb);
 	}
 
 	public void init()
@@ -79,7 +83,7 @@ public class CommonProxy
 				new ItemStack(glowstoneBit), new ItemStack(glowstoneBit),
 				new ItemStack(glowstoneBit), new ItemStack(glowstoneBit) },
 				new ItemStack(Items.GLOWSTONE_DUST)));
-		GameRegistry.addShapelessRecipe(new ItemStack(blockAirLight),
+		GameRegistry.addShapelessRecipe(new ItemStack(blockLightAir),
 				new ItemStack(coalDust), new ItemStack(Items.GLOWSTONE_DUST));
 		GameRegistry.addRecipe(new IRecipe()
 		{
@@ -98,7 +102,7 @@ public class CommonProxy
 				for (ItemStack i : input)
 				{
 					if (!isValidInput(i)) return false;
-					if (i.getItem() == Item.getItemFromBlock(blockAirLight))
+					if (i.getItem() == Item.getItemFromBlock(blockLightAir))
 					{
 						counter++;
 						if (counter > 1) return false;
@@ -112,7 +116,7 @@ public class CommonProxy
 			private boolean isValidInput(ItemStack in)
 			{
 				return in != null
-						? in.getItem() == Item.getItemFromBlock(blockAirLight)
+						? in.getItem() == Item.getItemFromBlock(blockLightAir)
 								|| OreDictionary.itemMatches(
 										new ItemStack(Items.GLOWSTONE_DUST), in,
 										false)
@@ -130,7 +134,7 @@ public class CommonProxy
 			{
 				if (!matches(inv, null)) return null;
 				ItemStack out =
-						new ItemStack(Item.getItemFromBlock(blockAirLight));
+						new ItemStack(Item.getItemFromBlock(blockLightAir));
 				int meta = 0;
 				int lighter = 0;
 				for (int i = 0; i < inv.getSizeInventory(); i++)
@@ -139,7 +143,7 @@ public class CommonProxy
 					if (in != null)
 					{
 						if (in.getItem() == Item
-								.getItemFromBlock(blockAirLight))
+								.getItemFromBlock(blockLightAir))
 							meta = in.getItemDamage();
 						else if (OreDictionary.itemMatches(
 								new ItemStack(Items.GLOWSTONE_DUST), in, false))
@@ -170,7 +174,7 @@ public class CommonProxy
 			@Override
 			public ItemStack getRecipeOutput()
 			{
-				return new ItemStack(Item.getItemFromBlock(blockAirLight));
+				return new ItemStack(Item.getItemFromBlock(blockLightAir));
 			}
 
 			@Override
@@ -178,18 +182,6 @@ public class CommonProxy
 					InventoryCrafting inv)
 			{
 				return NonNullList.create();
-				// Old implementation: didn't work!
-				// ItemStack[] out = new ItemStack[inv.getSizeInventory()];
-				// for (int i = 0; i < inv.getSizeInventory(); i++)
-				// {
-				// out[i] = inv.getStackInSlot(i) == null ? null : inv.getStackInSlot(i).copy();
-				// if (out[i] != null)
-				// {
-				// out[i].stackSize--;
-				// if (out[i].stackSize <= 0) out[i] = null;
-				// }
-				// }
-				// return out;
 			}
 		});
 	}

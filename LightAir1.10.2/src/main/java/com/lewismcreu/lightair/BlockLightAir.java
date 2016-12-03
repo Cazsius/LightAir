@@ -37,7 +37,6 @@ public class BlockLightAir extends BlockAir
 		setDefaultState(getDefaultState().withProperty(LIGHT_LEVEL, 15));
 		setResistance(6000001.0F);
 		disableStats();
-		setTickRandomly(true);
 		translucent = true;
 	}
 

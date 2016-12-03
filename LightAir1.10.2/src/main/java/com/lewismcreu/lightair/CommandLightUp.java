@@ -1,16 +1,18 @@
 package com.lewismcreu.lightair;
 
-import net.minecraft.block.state.IBlockState;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.function.Consumer;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.Chunk;
 
 public class CommandLightUp extends CommandBase
 {
@@ -31,31 +33,54 @@ public class CommandLightUp extends CommandBase
 			String[] args) throws CommandException
 	{
 		EntityPlayer player = getCommandSenderAsPlayer(sender);
-		Chunk chunk = player.getEntityWorld()
-				.getChunkFromBlockCoords(player.getPosition());
 
-		IBlockState target = CommonProxy.blockLightAir.getStateFromMeta(15);
+		Collection<ChunkPos> chunks = new ArrayList<>();
+
+		Consumer<BlockPos> taskPerBlock;
 
 		if (args.length > 0 && !Boolean.parseBoolean(args[0]))
+			taskPerBlock = (BlockPos b) -> {
+				if (player.getEntityWorld().getBlockState(b)
+						.getBlock() == CommonProxy.blockLightAir)
+					player.getEntityWorld().setBlockToAir(b);
+			};
+		else taskPerBlock = (BlockPos b) -> {
+			if (player.getEntityWorld().isAirBlock(b)
+					&& hasAdjacent(player.getEntityWorld(), b))
+				player.getEntityWorld().setBlockState(b,
+						CommonProxy.blockLightAir.getStateFromMeta(15), 3);
+		};
+
+		ChunkPos pos = player.getEntityWorld()
+				.getChunkFromBlockCoords(player.getPosition())
+				.getChunkCoordIntPair();
+		
+		if (args.length > 1)
 		{
-			target = Blocks.AIR.getDefaultState();
+			int radius = parseInt(args[1], 0,
+					LightAir.instance.config.getMaxChunkRadius());
+
+			if (radius > 0)
+			{
+				for (int x = -radius; x < radius + 1; x++)
+					for (int z = -radius; z < radius + 1; z++)
+						chunks.add(new ChunkPos(pos.chunkXPos + x,
+								pos.chunkZPos + z));
+			}
 		}
+		else chunks.add(pos);
 
-		final IBlockState state = target;
-
-		player.getEntityWorld().getMinecraftServer().addScheduledTask(() -> {
+		Consumer<ChunkPos> taskPerChunk = (ChunkPos p) -> {
 			for (int x = 0; x < 16; x++)
 				for (int y = 0; y < 256; y++)
 					for (int z = 0; z < 16; z++)
-					{
-						BlockPos n = new BlockPos(x, y, z).add(
-								chunk.xPosition * 16, 0, chunk.zPosition * 16);
-						if (player.getEntityWorld().isAirBlock(n)
-								&& hasAdjacent(player.getEntityWorld(), n))
-						{
-							player.getEntityWorld().setBlockState(n, state, 3);
-						}
-					}
+						taskPerBlock.accept(new BlockPos(x, y, z)
+								.add(p.chunkXPos * 16, 0, p.chunkZPos * 16));
+		};
+
+		player.worldObj.getMinecraftServer().addScheduledTask(() -> {
+			for (ChunkPos p : chunks)
+				taskPerChunk.accept(p);
 		});
 	}
 

@@ -9,16 +9,16 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ItemLightBomb extends Item
+public class ItemLightPouch extends Item
 {
-	public ItemLightBomb()
+	public ItemLightPouch()
 	{
-		setUnlocalizedName("light_bomb");
-		setRegistryName("light_bomb");
+		setUnlocalizedName("light_pouch");
+		setRegistryName("light_pouch");
 		setCreativeTab(CommonProxy.LIGHTAIR);
 	}
 
-	private static int cubeSize = 11;
+	private static int radius = 5;
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStack,
@@ -28,12 +28,12 @@ public class ItemLightBomb extends Item
 			return ActionResult.newResult(EnumActionResult.PASS, itemStack);
 
 		BlockPos pos = player.getPosition();
-		BlockPos minPos = pos.add(-cubeSize / 2, -cubeSize / 2, -cubeSize / 2);
+		BlockPos minPos = pos.add(-radius, -radius, -radius);
 
 		world.getMinecraftServer().addScheduledTask(() -> {
-			for (int x = 0; x < cubeSize; x++)
-				for (int y = 0; y < cubeSize; y++)
-					for (int z = 0; z < cubeSize; z++)
+			for (int x = 0; x < (radius * 2 + 1); x++)
+				for (int y = 0; y < (radius * 2 + 1); y++)
+					for (int z = 0; z < (radius * 2 + 1); z++)
 					{
 						BlockPos n = minPos.add(x, y, z);
 						if (world.isAirBlock(n)) world.setBlockState(n,

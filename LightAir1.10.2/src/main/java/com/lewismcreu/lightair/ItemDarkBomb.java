@@ -18,7 +18,7 @@ public class ItemDarkBomb extends Item
 		setCreativeTab(CommonProxy.LIGHTAIR);
 	}
 
-	private static int cubeSize = 17;
+	private static int radius = 8;
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStack,
@@ -28,12 +28,12 @@ public class ItemDarkBomb extends Item
 			return ActionResult.newResult(EnumActionResult.PASS, itemStack);
 
 		BlockPos pos = player.getPosition();
-		BlockPos minPos = pos.add(-cubeSize / 2, -cubeSize / 2, -cubeSize / 2);
+		BlockPos minPos = pos.add(-radius, -radius, -radius);
 
 		world.getMinecraftServer().addScheduledTask(() -> {
-			for (int x = 0; x < cubeSize; x++)
-				for (int y = 0; y < cubeSize; y++)
-					for (int z = 0; z < cubeSize; z++)
+			for (int x = 0; x < (radius * 2 + 1); x++)
+				for (int y = 0; y < (radius * 2 + 1); y++)
+					for (int z = 0; z < (radius * 2 + 1); z++)
 					{
 						BlockPos n = minPos.add(x, y, z);
 						if (world.getBlockState(n)

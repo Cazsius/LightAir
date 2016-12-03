@@ -36,7 +36,7 @@ public class CommonProxy
 			new Item().setUnlocalizedName("glowstone_bit")
 					.setRegistryName("glowstone_bit")
 					.setCreativeTab(CreativeTabs.MATERIALS);
-	public static final Item lightBomb = new ItemLightBomb();
+	public static final Item lightBomb = new ItemLightPouch();
 	public static final Item darkBomb = new ItemDarkBomb();
 	private static Item itemLightAir;
 

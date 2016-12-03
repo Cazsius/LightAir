@@ -57,7 +57,7 @@ public class BlockAirLight extends BlockAir
 		return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ,
 				meta, placer, hand).withProperty(LIGHT_LEVEL, meta);
 	}
-	
+
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player,
 			List<String> tooltip, boolean advanced)
@@ -114,7 +114,7 @@ public class BlockAirLight extends BlockAir
 	public void randomDisplayTick(IBlockState stateIn, World worldIn,
 			BlockPos pos, Random rand)
 	{
-		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
+		EntityPlayer p = Minecraft.getMinecraft().player;
 		if (((p.getHeldItemMainhand() != null && p.getHeldItemMainhand()
 				.getItem() == Item.getItemFromBlock(CommonProxy.blockAirLight))
 				|| (p.getHeldItemOffhand() != null

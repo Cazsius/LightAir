@@ -52,13 +52,13 @@ public class GuiLightAir extends GuiContainer
 			if (isPointInRegion(arrowX, topArrowY, arrowWidth, arrowHeight, mouseX, mouseY))
 			{
 				mc.playerController.sendEnchantPacket(this.inventorySlots.windowId, 0);
-				((ContainerLightAir) inventorySlots).enchantItem(mc.thePlayer, 0);
+				((ContainerLightAir) inventorySlots).enchantItem(mc.player, 0);
 				return;
 			}
 			else if (isPointInRegion(arrowX, botArrowY, arrowWidth, arrowHeight, mouseX, mouseY))
 			{
 				mc.playerController.sendEnchantPacket(this.inventorySlots.windowId, 1);
-				((ContainerLightAir) inventorySlots).enchantItem(mc.thePlayer, 1);
+				((ContainerLightAir) inventorySlots).enchantItem(mc.player, 1);
 				return;
 			}
 		}

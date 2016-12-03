@@ -159,7 +159,7 @@ public class CommonProxy
 					}
 				}
 				meta += lighter;
-				meta = MathHelper.clamp_int(meta, 0, 15);
+				meta = MathHelper.clamp(meta, 0, 15);
 				out.setItemDamage(meta);
 				return out;
 			}

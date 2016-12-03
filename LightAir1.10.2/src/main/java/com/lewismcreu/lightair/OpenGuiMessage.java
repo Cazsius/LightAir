@@ -24,7 +24,7 @@ public class OpenGuiMessage implements IMessage
 		public IMessage onMessage(OpenGuiMessage message, MessageContext ctx)
 		{
 			if (ctx.side.isServer()) ctx.getServerHandler().playerEntity.openGui(LightAir.instance, 0, ctx
-					.getServerHandler().playerEntity.worldObj, 0, 0, 0);
+					.getServerHandler().playerEntity.world, 0, 0, 0);
 
 			return null;
 		}

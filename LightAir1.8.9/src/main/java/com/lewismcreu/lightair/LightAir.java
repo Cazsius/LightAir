@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -29,6 +30,8 @@ public class LightAir
 
 	public static SimpleNetworkWrapper channel;
 
+	public static Config config;
+
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
@@ -37,6 +40,8 @@ public class LightAir
 		channel.registerMessage(OpenGuiMessage.Handler.class,
 				OpenGuiMessage.class, 0, Side.SERVER);
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+		config = new Config(
+				new Configuration(event.getSuggestedConfigurationFile()));
 	}
 
 	@EventHandler
@@ -55,7 +60,7 @@ public class LightAir
 			{
 				ItemStack s = player.getHeldItem();
 				if (s != null && s.getItem() == Item
-						.getItemFromBlock(CommonProxy.blockAirLight))
+						.getItemFromBlock(CommonProxy.blockLightAir))
 					return new ContainerLightAir(s);
 			}
 			return null;
@@ -69,10 +74,38 @@ public class LightAir
 			{
 				ItemStack s = player.getHeldItem();
 				if (s != null && s.getItem() == Item
-						.getItemFromBlock(CommonProxy.blockAirLight))
+						.getItemFromBlock(CommonProxy.blockLightAir))
 					return new GuiLightAir(new ContainerLightAir(s));
 			}
 			return null;
+		}
+	}
+
+	public class Config
+	{
+		private Configuration configuration;
+
+		private static final String category = "lightair";
+		private static final String key = "maxChunkRadius";
+		private static final String comment =
+				"Set the max area of effect of the lightup command";
+
+		private int maxChunkRadius;
+		private static final int maxMaxChunkRadius = 10;
+		private static final int minMaxChunkRadius = 0;
+		private static final int defaultMaxChunkRadius = 1;
+
+		public Config(Configuration conf)
+		{
+			this.configuration = conf;
+
+			maxChunkRadius = conf.getInt(key, category, defaultMaxChunkRadius,
+					minMaxChunkRadius, maxMaxChunkRadius, comment);
+		}
+
+		public int getMaxChunkRadius()
+		{
+			return maxChunkRadius;
 		}
 	}
 }

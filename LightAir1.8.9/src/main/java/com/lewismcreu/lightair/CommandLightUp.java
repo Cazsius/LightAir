@@ -9,32 +9,32 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class CommandLightUp extends CommandBase
 {
 	@Override
-	public String getName()
+	public String getCommandName()
 	{
 		return "lightup";
 	}
 
 	@Override
-	public String getUsage(ICommandSender sender)
+	public String getCommandUsage(ICommandSender sender)
 	{
 		return I18n.format("command.lightup.usage");
 	}
 
 	@Override
-	public void execute(MinecraftServer server, ICommandSender sender,
-			String[] args) throws CommandException
+	public void processCommand(ICommandSender sender, String[] args)
+			throws CommandException
 	{
 		EntityPlayer player = getCommandSenderAsPlayer(sender);
 
-		Collection<ChunkPos> chunks = new ArrayList<>();
+		Collection<ChunkCoordIntPair> chunks = new ArrayList<>();
 
 		Consumer<BlockPos> taskPerBlock;
 
@@ -51,26 +51,26 @@ public class CommandLightUp extends CommandBase
 						CommonProxy.blockLightAir.getStateFromMeta(15), 3);
 		};
 
-		ChunkPos pos = player.getEntityWorld()
+		ChunkCoordIntPair pos = player.getEntityWorld()
 				.getChunkFromBlockCoords(player.getPosition())
 				.getChunkCoordIntPair();
 
 		if (args.length > 1)
 		{
-			int radius = parseInt(args[1], 0,
-					LightAir.instance.config.getMaxChunkRadius());
+			int radius =
+					parseInt(args[1], 0, LightAir.config.getMaxChunkRadius());
 
 			if (radius > 0)
 			{
 				for (int x = -radius; x < radius + 1; x++)
 					for (int z = -radius; z < radius + 1; z++)
-						chunks.add(new ChunkPos(pos.chunkXPos + x,
+						chunks.add(new ChunkCoordIntPair(pos.chunkXPos + x,
 								pos.chunkZPos + z));
 			}
 		}
 		else chunks.add(pos);
 
-		Consumer<ChunkPos> taskPerChunk = (ChunkPos p) -> {
+		Consumer<ChunkCoordIntPair> taskPerChunk = (ChunkCoordIntPair p) -> {
 			for (int x = 0; x < 16; x++)
 				for (int y = 0; y < 256; y++)
 					for (int z = 0; z < 16; z++)
@@ -78,10 +78,11 @@ public class CommandLightUp extends CommandBase
 								.add(p.chunkXPos * 16, 0, p.chunkZPos * 16));
 		};
 
-		server.addScheduledTask(() -> {
-			for (ChunkPos p : chunks)
-				taskPerChunk.accept(p);
-		});
+		FMLCommonHandler.instance().getMinecraftServerInstance()
+				.addScheduledTask(() -> {
+					for (ChunkCoordIntPair p : chunks)
+						taskPerChunk.accept(p);
+				});
 	}
 
 	private static boolean hasAdjacent(World world, BlockPos pos)

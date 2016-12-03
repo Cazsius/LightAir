@@ -17,13 +17,13 @@ import net.minecraft.world.World;
 public class CommandLightUp extends CommandBase
 {
 	@Override
-	public String getCommandName()
+	public String getName()
 	{
 		return "lightup";
 	}
 
 	@Override
-	public String getCommandUsage(ICommandSender sender)
+	public String getUsage(ICommandSender sender)
 	{
 		return I18n.format("command.lightup.usage");
 	}
@@ -54,11 +54,11 @@ public class CommandLightUp extends CommandBase
 		ChunkPos pos = player.getEntityWorld()
 				.getChunkFromBlockCoords(player.getPosition())
 				.getChunkCoordIntPair();
-		
+
 		if (args.length > 1)
 		{
-			int radius = parseInt(args[1], 0,
-					LightAir.instance.config.getMaxChunkRadius());
+			int radius =
+					parseInt(args[1], 0, LightAir.config.getMaxChunkRadius());
 
 			if (radius > 0)
 			{
@@ -78,7 +78,7 @@ public class CommandLightUp extends CommandBase
 								.add(p.chunkXPos * 16, 0, p.chunkZPos * 16));
 		};
 
-		player.worldObj.getMinecraftServer().addScheduledTask(() -> {
+		server.addScheduledTask(() -> {
 			for (ChunkPos p : chunks)
 				taskPerChunk.accept(p);
 		});

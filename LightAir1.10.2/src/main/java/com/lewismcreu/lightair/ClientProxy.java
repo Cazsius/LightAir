@@ -58,8 +58,8 @@ public class ClientProxy extends CommonProxy
 	@SubscribeEvent
 	public void onPlayerKeypressed(InputEvent.KeyInputEvent event)
 	{
-		if (openGui.isPressed() && Minecraft
-				.getMinecraft().thePlayer.capabilities.isCreativeMode)
+		if (openGui.isPressed()
+				&& Minecraft.getMinecraft().player.capabilities.isCreativeMode)
 			LightAir.channel.sendToServer(new OpenGuiMessage());
 	}
 }

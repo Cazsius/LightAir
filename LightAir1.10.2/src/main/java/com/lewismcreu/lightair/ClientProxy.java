@@ -48,8 +48,8 @@ public class ClientProxy extends CommonProxy
 				.register(glowstoneBit, 0, new ModelResourceLocation(
 						LightAir.MOD_ID + ":glowstone_bit", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
-				.register(lightBomb, 0, new ModelResourceLocation(
-						LightAir.MOD_ID + ":" + "light_bomb", "inventory"));
+				.register(lightPouch, 0, new ModelResourceLocation(
+						LightAir.MOD_ID + ":" + "light_pouch", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
 				.register(darkBomb, 0, new ModelResourceLocation(
 						LightAir.MOD_ID + ":" + "dark_bomb", "inventory"));

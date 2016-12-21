@@ -13,6 +13,10 @@ public class ItemBlockLightAir extends ItemBlock
 	{
 		super(block);
 		hasSubtypes = true;
+	}
+
+	public void register()
+	{
 		registerItemBlock(block, this);
 	}
 

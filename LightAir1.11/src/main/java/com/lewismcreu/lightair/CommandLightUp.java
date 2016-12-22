@@ -58,7 +58,7 @@ public class CommandLightUp extends CommandBase
 		if (args.length > 1)
 		{
 			int radius = parseInt(args[1], 0,
-					LightAir.instance.config.getMaxChunkRadius());
+					LightAir.config.getMaxChunkRadius());
 
 			if (radius > 0)
 			{

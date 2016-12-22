@@ -90,8 +90,6 @@ public class LightAir
 
 	public class Config
 	{
-		private Configuration configuration;
-
 		private static final String category = "lightair";
 		private static final String key = "maxChunkRadius";
 		private static final String comment =
@@ -104,8 +102,6 @@ public class LightAir
 
 		public Config(Configuration conf)
 		{
-			this.configuration = conf;
-
 			maxChunkRadius = conf.getInt(key, category, defaultMaxChunkRadius,
 					minMaxChunkRadius, maxMaxChunkRadius, comment);
 		}

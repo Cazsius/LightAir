@@ -39,12 +39,10 @@ public class CommonProxy
 					.setCreativeTab(CreativeTabs.MATERIALS);
 	public static final Item lightBomb = new ItemLightPouch();
 	public static final Item darkBomb = new ItemDarkBomb();
-	private static Item itemLightAir;
-
 	public void preInit()
 	{
 		GameRegistry.register(blockLightAir);
-		itemLightAir = new ItemBlockLightAir(blockLightAir);
+		new ItemBlockLightAir(blockLightAir);
 		GameRegistry.register(coalDust);
 		GameRegistry.register(coalBit);
 		GameRegistry.register(glowstoneBit);

@@ -52,13 +52,12 @@ public class CommandLightUp extends CommandBase
 		};
 
 		ChunkPos pos = player.getEntityWorld()
-				.getChunkFromBlockCoords(player.getPosition())
-				.getChunkCoordIntPair();
+				.getChunkFromBlockCoords(player.getPosition()).getPos();
 
 		if (args.length > 1)
 		{
-			int radius = parseInt(args[1], 0,
-					LightAir.instance.config.getMaxChunkRadius());
+			int radius =
+					parseInt(args[1], 0, LightAir.config.getMaxChunkRadius());
 
 			if (radius > 0)
 			{

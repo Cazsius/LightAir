@@ -54,5 +54,4 @@ public class BlockStructuralAir extends Block
 	{
 		return BlockRenderLayer.CUTOUT;
 	}
-
 }

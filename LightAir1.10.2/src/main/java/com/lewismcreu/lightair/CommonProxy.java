@@ -82,7 +82,7 @@ public class CommonProxy
 				new ItemStack(glowstoneBit), new ItemStack(glowstoneBit),
 				new ItemStack(glowstoneBit), new ItemStack(glowstoneBit) },
 				new ItemStack(Items.GLOWSTONE_DUST)));
-		GameRegistry.addShapelessRecipe(new ItemStack(blockLightAir),
+		GameRegistry.addShapelessRecipe(new ItemStack(blockLightAir, 15),
 				new ItemStack(coalDust), new ItemStack(Items.GLOWSTONE_DUST));
 		GameRegistry.addRecipe(new IRecipe()
 		{

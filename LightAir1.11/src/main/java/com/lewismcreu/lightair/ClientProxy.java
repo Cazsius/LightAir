@@ -3,7 +3,6 @@ package com.lewismcreu.lightair;
 import org.lwjgl.input.Keyboard;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.settings.KeyBinding;
@@ -30,29 +29,30 @@ public class ClientProxy extends CommonProxy
 		MinecraftForge.EVENT_BUS.register(this);
 		Minecraft.getMinecraft().getBlockRendererDispatcher()
 				.getBlockModelShapes().registerBlockWithStateMapper(
-						BLOCK_LIGHT_AIR, new StateMap.Builder()
+						blockLightAir, new StateMap.Builder()
 								.ignore(BlockLightAir.LIGHT_LEVEL).build());
 
-		ItemModelMesher mesher =
-				Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
-
 		for (int i = 0; i < 16; i++)
-			mesher.register(Item.getItemFromBlock(BLOCK_LIGHT_AIR), i,
-					new ModelResourceLocation(LightAir.MOD_ID + ":light_air",
-							"inventory"));
-		mesher.register(Item.getItemFromBlock(BLOCK_STRUCTURAL_AIR), 0,
-				new ModelResourceLocation(LightAir.MOD_ID + ":structural_air",
-						"inventory"));
-		mesher.register(ITEM_COAL_DUST, 0, new ModelResourceLocation(
-				LightAir.MOD_ID + ":coal_dust", "inventory"));
-		mesher.register(ITEM_COAL_BIT, 0, new ModelResourceLocation(
-				LightAir.MOD_ID + ":coal_bit", "inventory"));
-		mesher.register(ITEM_GLOWSTONE_BIT, 0, new ModelResourceLocation(
-				LightAir.MOD_ID + ":glowstone_bit", "inventory"));
-		mesher.register(ITEM_LIGHT_BOMB, 0, new ModelResourceLocation(
-				LightAir.MOD_ID + ":" + "light_bomb", "inventory"));
-		mesher.register(ITEM_DARK_BOMB, 0, new ModelResourceLocation(
-				LightAir.MOD_ID + ":" + "dark_bomb", "inventory"));
+			Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
+					.register(Item.getItemFromBlock(blockLightAir), i,
+							new ModelResourceLocation(
+									LightAir.MOD_ID + ":light_air",
+									"inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
+				.register(coalDust, 0, new ModelResourceLocation(
+						LightAir.MOD_ID + ":coal_dust", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
+				.register(coalBit, 0, new ModelResourceLocation(
+						LightAir.MOD_ID + ":coal_bit", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
+				.register(glowstoneBit, 0, new ModelResourceLocation(
+						LightAir.MOD_ID + ":glowstone_bit", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
+				.register(lightBomb, 0, new ModelResourceLocation(
+						LightAir.MOD_ID + ":" + "light_bomb", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
+				.register(darkBomb, 0, new ModelResourceLocation(
+						LightAir.MOD_ID + ":" + "dark_bomb", "inventory"));
 	}
 
 	@SubscribeEvent

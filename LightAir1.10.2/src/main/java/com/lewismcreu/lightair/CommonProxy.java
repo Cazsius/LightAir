@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
@@ -84,6 +85,22 @@ public class CommonProxy
 				new ItemStack(Items.GLOWSTONE_DUST)));
 		GameRegistry.addShapelessRecipe(new ItemStack(blockLightAir, 15),
 				new ItemStack(coalDust), new ItemStack(Items.GLOWSTONE_DUST));
+		GameRegistry.addRecipe(new ShapedRecipes(3, 3, new ItemStack[] 
+				{
+				new ItemStack(itemLightAir), new ItemStack(Blocks.OBSIDIAN), new ItemStack(itemLightAir), 
+				new ItemStack(Blocks.OBSIDIAN), new ItemStack(Blocks.TNT), new ItemStack(Blocks.OBSIDIAN),
+				new ItemStack(itemLightAir), new ItemStack(Blocks.OBSIDIAN), new ItemStack(itemLightAir) 
+				}, 
+				new ItemStack(darkBomb)));
+		
+		GameRegistry.addRecipe(new ShapedRecipes(3, 3, new ItemStack[] 
+				{
+				new ItemStack(blockLightAir, 1, 15), null, new ItemStack(blockLightAir, 1, 15), 
+				new ItemStack(Items.LEATHER), new ItemStack(blockLightAir, 1, 15), new ItemStack(Items.LEATHER),
+				new ItemStack(Items.LEATHER), new ItemStack(Items.LEATHER), new ItemStack(Items.LEATHER) 
+				}, 
+				new ItemStack(lightPouch)));
+		
 		GameRegistry.addRecipe(new IRecipe()
 		{
 			@Override

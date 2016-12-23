@@ -13,7 +13,6 @@ public class ItemBlockLightAir extends ItemBlock
 	{
 		super(block);
 		hasSubtypes = true;
-		registerItemBlock(block, this);
 	}
 
 	@Override
@@ -23,21 +22,21 @@ public class ItemBlockLightAir extends ItemBlock
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn,
+	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStack,
 			World worldIn, EntityPlayer playerIn, EnumHand hand)
 	{
 		if (!worldIn.isRemote)
 			return ActionResult
 					.newResult(
-							onItemUse(itemStackIn, playerIn, worldIn,
+							onItemUse(itemStack, playerIn, worldIn,
 									playerIn.getPosition()
 											.offset(playerIn
 													.getHorizontalFacing())
 											.up(),
 									hand, playerIn.getHorizontalFacing(), 0, 0,
 									0),
-							itemStackIn);
-		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
+							playerIn.getHeldItem(hand));
+		return super.onItemRightClick(itemStack, worldIn, playerIn, hand);
 	}
 
 	@Override

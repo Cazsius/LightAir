@@ -13,7 +13,6 @@ public class ItemBlockLightAir extends ItemBlock
 	{
 		super(block);
 		hasSubtypes = true;
-		registerItemBlock(block, this);
 	}
 
 	@Override

@@ -60,7 +60,7 @@ public class LightAir
 			{
 				ItemStack s = player.getHeldItemMainhand();
 				if (s != null && s.getItem() == Item
-						.getItemFromBlock(CommonProxy.blockLightAir))
+						.getItemFromBlock(CommonProxy.BLOCK_LIGHT_AIR))
 					return new ContainerLightAir(s);
 			}
 			return null;
@@ -74,7 +74,7 @@ public class LightAir
 			{
 				ItemStack s = player.getHeldItemMainhand();
 				if (s != null && s.getItem() == Item
-						.getItemFromBlock(CommonProxy.blockLightAir))
+						.getItemFromBlock(CommonProxy.BLOCK_LIGHT_AIR))
 					return new GuiLightAir(new ContainerLightAir(s));
 			}
 			return null;

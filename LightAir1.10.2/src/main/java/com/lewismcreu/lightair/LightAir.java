@@ -10,7 +10,6 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
@@ -51,12 +50,6 @@ public class LightAir
 		proxy.init();
 	}
 
-	@EventHandler
-	public void serverStarting(FMLServerStartingEvent event)
-	{
-		event.registerServerCommand(new CommandLightUp());
-	}
-
 	public class GuiHandler implements IGuiHandler
 	{
 		@Override
@@ -67,7 +60,7 @@ public class LightAir
 			{
 				ItemStack s = player.getHeldItemMainhand();
 				if (s != null && s.getItem() == Item
-						.getItemFromBlock(CommonProxy.blockLightAir))
+						.getItemFromBlock(CommonProxy.BLOCK_LIGHT_AIR))
 					return new ContainerLightAir(s);
 			}
 			return null;
@@ -81,7 +74,7 @@ public class LightAir
 			{
 				ItemStack s = player.getHeldItemMainhand();
 				if (s != null && s.getItem() == Item
-						.getItemFromBlock(CommonProxy.blockLightAir))
+						.getItemFromBlock(CommonProxy.BLOCK_LIGHT_AIR))
 					return new GuiLightAir(new ContainerLightAir(s));
 			}
 			return null;
@@ -90,6 +83,8 @@ public class LightAir
 
 	public class Config
 	{
+		private Configuration configuration;
+
 		private static final String category = "lightair";
 		private static final String key = "maxChunkRadius";
 		private static final String comment =
@@ -102,8 +97,11 @@ public class LightAir
 
 		public Config(Configuration conf)
 		{
-			maxChunkRadius = conf.getInt(key, category, defaultMaxChunkRadius,
-					minMaxChunkRadius, maxMaxChunkRadius, comment);
+			this.configuration = conf;
+
+			maxChunkRadius =
+					configuration.getInt(key, category, defaultMaxChunkRadius,
+							minMaxChunkRadius, maxMaxChunkRadius, comment);
 		}
 
 		public int getMaxChunkRadius()

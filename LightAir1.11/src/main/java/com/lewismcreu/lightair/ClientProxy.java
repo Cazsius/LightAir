@@ -27,31 +27,36 @@ public class ClientProxy extends CommonProxy
 				"key.category.lightair");
 		ClientRegistry.registerKeyBinding(openGui);
 		MinecraftForge.EVENT_BUS.register(this);
+
 		Minecraft.getMinecraft().getBlockRendererDispatcher()
 				.getBlockModelShapes().registerBlockWithStateMapper(
-						blockLightAir, new StateMap.Builder()
+						BLOCK_LIGHT_AIR, new StateMap.Builder()
 								.ignore(BlockLightAir.LIGHT_LEVEL).build());
 
 		for (int i = 0; i < 16; i++)
 			Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
-					.register(Item.getItemFromBlock(blockLightAir), i,
+					.register(Item.getItemFromBlock(BLOCK_LIGHT_AIR), i,
 							new ModelResourceLocation(
 									LightAir.MOD_ID + ":light_air",
 									"inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(
+				Item.getItemFromBlock(BLOCK_STRUCTURAL_AIR), 0,
+				new ModelResourceLocation(LightAir.MOD_ID + ":structural_air",
+						"inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
-				.register(coalDust, 0, new ModelResourceLocation(
+				.register(COAL_DUST, 0, new ModelResourceLocation(
 						LightAir.MOD_ID + ":coal_dust", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
-				.register(coalBit, 0, new ModelResourceLocation(
+				.register(COAL_BIT, 0, new ModelResourceLocation(
 						LightAir.MOD_ID + ":coal_bit", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
-				.register(glowstoneBit, 0, new ModelResourceLocation(
+				.register(GLOWSTONE_BIT, 0, new ModelResourceLocation(
 						LightAir.MOD_ID + ":glowstone_bit", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
-				.register(lightBomb, 0, new ModelResourceLocation(
-						LightAir.MOD_ID + ":" + "light_bomb", "inventory"));
+				.register(LIGHT_POUCH, 0, new ModelResourceLocation(
+						LightAir.MOD_ID + ":" + "light_pouch", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
-				.register(darkBomb, 0, new ModelResourceLocation(
+				.register(DARK_BOMB, 0, new ModelResourceLocation(
 						LightAir.MOD_ID + ":" + "dark_bomb", "inventory"));
 	}
 

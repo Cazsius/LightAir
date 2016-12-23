@@ -1,5 +1,6 @@
 tile.light_air.name=Light Air
 tile.dark_air.name=Dark Air
+tile.structural_air.name=Structural Air
 lightair.tooltip.lightlevel=Light Level: %f
 key.lightair.opengui=Open Light Configuration GUI
 key.category.lightair=LightAir
@@ -9,4 +10,3 @@ item.coal_bit.name=Coal Bit
 item.light_pouch.name=Light Pouch
 item.dark_bomb.name=Dark Bomb
 itemGroup.lightair=LightAir
-command.lightup.usage=/lightup

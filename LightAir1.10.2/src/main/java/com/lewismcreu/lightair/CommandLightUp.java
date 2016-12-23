@@ -41,14 +41,14 @@ public class CommandLightUp extends CommandBase
 		if (args.length > 0 && !Boolean.parseBoolean(args[0]))
 			taskPerBlock = (BlockPos b) -> {
 				if (player.getEntityWorld().getBlockState(b)
-						.getBlock() == CommonProxy.blockLightAir)
+						.getBlock() == CommonProxy.BLOCK_LIGHT_AIR)
 					player.getEntityWorld().setBlockToAir(b);
 			};
 		else taskPerBlock = (BlockPos b) -> {
 			if (player.getEntityWorld().isAirBlock(b)
 					&& hasAdjacent(player.getEntityWorld(), b))
 				player.getEntityWorld().setBlockState(b,
-						CommonProxy.blockLightAir.getStateFromMeta(15), 3);
+						CommonProxy.BLOCK_LIGHT_AIR.getStateFromMeta(15), 3);
 		};
 
 		ChunkPos pos = player.getEntityWorld()

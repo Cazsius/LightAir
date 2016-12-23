@@ -36,9 +36,9 @@ public class ItemLightPouch extends Item
 					for (int z = 0; z < (radius * 2 + 1); z++)
 					{
 						BlockPos n = minPos.add(x, y, z);
-						if (world.isAirBlock(n)) world.setBlockState(n,
-								CommonProxy.blockLightAir.getStateFromMeta(15),
-								2);
+						if (world.isAirBlock(n))
+							world.setBlockState(n, CommonProxy.BLOCK_LIGHT_AIR
+									.getStateFromMeta(15), 2);
 					}
 		});
 		itemStack.stackSize--;

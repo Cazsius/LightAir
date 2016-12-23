@@ -41,12 +41,12 @@ public class BlockLightAir extends BlockAir
 	}
 
 	@Override
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos,
+	public IBlockState getStateForPlacement(World world, BlockPos pos,
 			EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
 			EntityLivingBase placer)
 	{
-		return super.getStateForPlacement(worldIn, pos, facing, hitX, hitY,
-				hitZ, meta, placer).withProperty(LIGHT_LEVEL, meta);
+		return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ,
+				meta, placer).withProperty(LIGHT_LEVEL, meta);
 	}
 
 	@Override
@@ -106,11 +106,12 @@ public class BlockLightAir extends BlockAir
 			BlockPos pos, Random rand)
 	{
 		EntityPlayer p = Minecraft.getMinecraft().player;
-		if (((p.getHeldItemMainhand() != null && p.getHeldItemMainhand()
-				.getItem() == Item.getItemFromBlock(CommonProxy.blockLightAir))
-				|| (p.getHeldItemOffhand() != null
-						&& p.getHeldItemOffhand().getItem() == Item
-								.getItemFromBlock(CommonProxy.blockLightAir))))
+		if (((p.getHeldItemMainhand() != null
+				&& p.getHeldItemMainhand().getItem() == Item
+						.getItemFromBlock(CommonProxy.BLOCK_LIGHT_AIR))
+				|| (p.getHeldItemOffhand() != null && p.getHeldItemOffhand()
+						.getItem() == Item.getItemFromBlock(
+								CommonProxy.BLOCK_LIGHT_AIR))))
 		{
 			for (int i = 0; i < 2; i++)
 				worldIn.spawnParticle(EnumParticleTypes.CLOUD, pos.getX() + 0.5,

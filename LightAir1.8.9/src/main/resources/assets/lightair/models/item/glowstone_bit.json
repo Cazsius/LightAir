@@ -1,6 +1,0 @@
-{
-	"parent": "lightair:item/base_item",
-	"textures": {
-		"layer0": "lightair:items/glowstone_bit"
-	}
-}

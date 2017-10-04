@@ -15,7 +15,7 @@ public class ItemDarkBomb extends Item
 	{
 		setUnlocalizedName("dark_bomb");
 		setRegistryName("dark_bomb");
-		setCreativeTab(CommonProxy.LIGHTAIR);
+		setCreativeTab(Registry.LIGHTAIR);
 	}
 
 	private static int radius = 8;

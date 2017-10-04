@@ -9,21 +9,18 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ItemLightPouch extends Item
-{
-	public ItemLightPouch()
-	{
+public class ItemLightPouch extends Item {
+	public ItemLightPouch() {
 		setUnlocalizedName("light_pouch");
 		setRegistryName("light_pouch");
-		setCreativeTab(CommonProxy.LIGHTAIR);
+		setCreativeTab(Registry.LIGHTAIR);
 	}
 
 	private static int radius = 5;
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world,
-			EntityPlayer player, EnumHand hand)
-	{
+			EntityPlayer player, EnumHand hand) {
 		ItemStack itemStack = player.getHeldItem(hand);
 		if (world.isRemote)
 			return ActionResult.newResult(EnumActionResult.PASS, itemStack);
@@ -34,11 +31,10 @@ public class ItemLightPouch extends Item
 		world.getMinecraftServer().addScheduledTask(() -> {
 			for (int x = 0; x < (radius * 2 + 1); x++)
 				for (int y = 0; y < (radius * 2 + 1); y++)
-					for (int z = 0; z < (radius * 2 + 1); z++)
-					{
+					for (int z = 0; z < (radius * 2 + 1); z++) {
 						BlockPos n = minPos.add(x, y, z);
 						if (world.isAirBlock(n))
-							world.setBlockState(n, CommonProxy.BLOCK_LIGHT_AIR
+							world.setBlockState(n, Registry.BLOCK_LIGHT_AIR
 									.getStateFromMeta(15), 2);
 					}
 		});

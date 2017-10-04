@@ -46,7 +46,7 @@ public class GuiLightAir extends GuiContainer
 				mouseX, mouseY))
 			drawTexturedModalRect(guiLeft + arrowX, guiTop + botArrowY,
 					botArrowHoverX, botArrowHoverY, arrowWidth, arrowHeight);
-		drawCenteredString(fontRendererObj,
+		drawCenteredString(fontRenderer,
 				"§l" + ((ContainerLightAir) inventorySlots).getItemMeta() + "",
 				guiLeft + x, guiTop + y, Color.WHITE.getRGB());
 	}

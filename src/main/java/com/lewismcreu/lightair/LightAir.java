@@ -16,16 +16,14 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
 @Mod(modid = LightAir.MOD_ID, name = LightAir.MOD_NAME)
-public class LightAir
-{
+public class LightAir {
 	public static final String MOD_ID = "lightair";
 	public static final String MOD_NAME = "Light Air";
 
 	@Mod.Instance("lightair")
 	public static LightAir instance;
 
-	@SidedProxy(clientSide = "com.lewismcreu.lightair.ClientProxy",
-			serverSide = "com.lewismcreu.lightair.CommonProxy")
+	@SidedProxy(clientSide = "com.lewismcreu.lightair.ClientProxy", serverSide = "com.lewismcreu.lightair.CommonProxy")
 	public static CommonProxy proxy;
 
 	public static SimpleNetworkWrapper channel;
@@ -33,8 +31,7 @@ public class LightAir
 	public static Config config;
 
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent event)
-	{
+	public void preInit(FMLPreInitializationEvent event) {
 		proxy.preInit();
 		channel = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
 		channel.registerMessage(OpenGuiMessage.Handler.class,
@@ -45,22 +42,18 @@ public class LightAir
 	}
 
 	@EventHandler
-	public void init(FMLInitializationEvent event)
-	{
+	public void init(FMLInitializationEvent event) {
 		proxy.init();
 	}
 
-	public class GuiHandler implements IGuiHandler
-	{
+	public class GuiHandler implements IGuiHandler {
 		@Override
 		public Object getServerGuiElement(int ID, EntityPlayer player,
-				World world, int x, int y, int z)
-		{
-			if (ID == 0)
-			{
+				World world, int x, int y, int z) {
+			if (ID == 0) {
 				ItemStack s = player.getHeldItemMainhand();
 				if (s != null && s.getItem() == Item
-						.getItemFromBlock(CommonProxy.BLOCK_LIGHT_AIR))
+						.getItemFromBlock(Registry.BLOCK_LIGHT_AIR))
 					return new ContainerLightAir(s);
 			}
 			return null;
@@ -68,44 +61,38 @@ public class LightAir
 
 		@Override
 		public Object getClientGuiElement(int ID, EntityPlayer player,
-				World world, int x, int y, int z)
-		{
-			if (ID == 0)
-			{
+				World world, int x, int y, int z) {
+			if (ID == 0) {
 				ItemStack s = player.getHeldItemMainhand();
 				if (s != null && s.getItem() == Item
-						.getItemFromBlock(CommonProxy.BLOCK_LIGHT_AIR))
+						.getItemFromBlock(Registry.BLOCK_LIGHT_AIR))
 					return new GuiLightAir(new ContainerLightAir(s));
 			}
 			return null;
 		}
 	}
 
-	public class Config
-	{
+	public class Config {
 		private Configuration configuration;
 
 		private static final String category = "lightair";
 		private static final String key = "maxChunkRadius";
-		private static final String comment =
-				"Set the max area of effect of the lightup command";
+		private static final String comment = "Set the max area of effect of the lightup command";
 
 		private int maxChunkRadius;
 		private static final int maxMaxChunkRadius = 10;
 		private static final int minMaxChunkRadius = 0;
 		private static final int defaultMaxChunkRadius = 1;
 
-		public Config(Configuration conf)
-		{
+		public Config(Configuration conf) {
 			this.configuration = conf;
 
-			maxChunkRadius =
-					configuration.getInt(key, category, defaultMaxChunkRadius,
-							minMaxChunkRadius, maxMaxChunkRadius, comment);
+			maxChunkRadius = configuration.getInt(key, category,
+					defaultMaxChunkRadius, minMaxChunkRadius, maxMaxChunkRadius,
+					comment);
 		}
 
-		public int getMaxChunkRadius()
-		{
+		public int getMaxChunkRadius() {
 			return maxChunkRadius;
 		}
 	}

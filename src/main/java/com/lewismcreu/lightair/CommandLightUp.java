@@ -14,24 +14,20 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 
-public class CommandLightUp extends CommandBase
-{
+public class CommandLightUp extends CommandBase {
 	@Override
-	public String getName()
-	{
+	public String getName() {
 		return "lightup";
 	}
 
 	@Override
-	public String getUsage(ICommandSender sender)
-	{
+	public String getUsage(ICommandSender sender) {
 		return I18n.format("command.lightup.usage");
 	}
 
 	@Override
 	public void execute(MinecraftServer server, ICommandSender sender,
-			String[] args) throws CommandException
-	{
+			String[] args) throws CommandException {
 		EntityPlayer player = getCommandSenderAsPlayer(sender);
 
 		Collection<ChunkPos> chunks = new ArrayList<>();
@@ -41,40 +37,38 @@ public class CommandLightUp extends CommandBase
 		if (args.length > 0 && !Boolean.parseBoolean(args[0]))
 			taskPerBlock = (BlockPos b) -> {
 				if (player.getEntityWorld().getBlockState(b)
-						.getBlock() == CommonProxy.BLOCK_LIGHT_AIR)
+						.getBlock() == Registry.BLOCK_LIGHT_AIR)
 					player.getEntityWorld().setBlockToAir(b);
 			};
-		else taskPerBlock = (BlockPos b) -> {
-			if (player.getEntityWorld().isAirBlock(b)
-					&& hasAdjacent(player.getEntityWorld(), b))
-				player.getEntityWorld().setBlockState(b,
-						CommonProxy.BLOCK_LIGHT_AIR.getStateFromMeta(15), 3);
-		};
+		else
+			taskPerBlock = (BlockPos b) -> {
+				if (player.getEntityWorld().isAirBlock(b)
+						&& hasAdjacent(player.getEntityWorld(), b))
+					player.getEntityWorld().setBlockState(b,
+							Registry.BLOCK_LIGHT_AIR.getStateFromMeta(15), 3);
+			};
 
 		ChunkPos pos = player.getEntityWorld()
 				.getChunkFromBlockCoords(player.getPosition()).getPos();
 
-		if (args.length > 1)
-		{
-			int radius =
-					parseInt(args[1], 0, LightAir.config.getMaxChunkRadius());
+		if (args.length > 1) {
+			int radius = parseInt(args[1], 0,
+					LightAir.config.getMaxChunkRadius());
 
-			if (radius > 0)
-			{
+			if (radius > 0) {
 				for (int x = -radius; x < radius + 1; x++)
 					for (int z = -radius; z < radius + 1; z++)
-						chunks.add(new ChunkPos(pos.chunkXPos + x,
-								pos.chunkZPos + z));
+						chunks.add(new ChunkPos(pos.x + x, pos.z + z));
 			}
-		}
-		else chunks.add(pos);
+		} else
+			chunks.add(pos);
 
 		Consumer<ChunkPos> taskPerChunk = (ChunkPos p) -> {
 			for (int x = 0; x < 16; x++)
 				for (int y = 0; y < 256; y++)
 					for (int z = 0; z < 16; z++)
-						taskPerBlock.accept(new BlockPos(x, y, z)
-								.add(p.chunkXPos * 16, 0, p.chunkZPos * 16));
+						taskPerBlock.accept(new BlockPos(x, y, z).add(p.x * 16,
+								0, p.z * 16));
 		};
 
 		server.addScheduledTask(() -> {
@@ -83,8 +77,7 @@ public class CommandLightUp extends CommandBase
 		});
 	}
 
-	private static boolean hasAdjacent(World world, BlockPos pos)
-	{
+	private static boolean hasAdjacent(World world, BlockPos pos) {
 		return !world.isAirBlock(pos.down()) || !world.isAirBlock(pos.up())
 				|| !world.isAirBlock(pos.east())
 				|| !world.isAirBlock(pos.north())

@@ -11,47 +11,40 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockStructuralAir extends Block
-{
-	public BlockStructuralAir()
-	{
+public class BlockStructuralAir extends Block {
+	public BlockStructuralAir() {
 		super(Material.WEB);
 		setUnlocalizedName("structural_air");
 		setRegistryName("structural_air");
-		setCreativeTab(CommonProxy.LIGHTAIR);
+		setCreativeTab(Registry.LIGHTAIR);
 		setResistance(6000001.0F);
 		disableStats();
 		translucent = true;
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state)
-	{
+	public EnumBlockRenderType getRenderType(IBlockState state) {
 		return EnumBlockRenderType.INVISIBLE;
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
-	{
+	public boolean isOpaqueCube(IBlockState state) {
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
-	{
+	public boolean isFullCube(IBlockState state) {
 		return false;
 	}
 
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState,
-			IBlockAccess worldIn, BlockPos pos)
-	{
+			IBlockAccess worldIn, BlockPos pos) {
 		return NULL_AABB;
 	}
 
 	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer()
-	{
+	public BlockRenderLayer getBlockLayer() {
 		return BlockRenderLayer.CUTOUT;
 	}
 }

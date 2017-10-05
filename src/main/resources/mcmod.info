@@ -4,7 +4,7 @@
   "name": "LightAir",
   "description": "LightAir adds a simple block that is invisible and will add light into the world. It is 100% survival + creative friendly and can be customized to all light levels.",
   "version": "${version}",
-  "mcversion": "${mcversion}",
+  "mcversion": "1.12, 1.12.1, 1.12.2",
   "url": "https://minecraft.curseforge.com/projects/lightair",
   "updateUrl": "",
   "authorList": ["Lewis_McReu, MrTrollNugNug"],

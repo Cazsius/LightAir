@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
-@Mod(modid = LightAir.MOD_ID, name = LightAir.MOD_NAME)
+@Mod(modid = LightAir.MOD_ID, name = LightAir.MOD_NAME, acceptedMinecraftVersions="[1.12,1.12.2]")
 public class LightAir {
 	public static final String MOD_ID = "lightair";
 	public static final String MOD_NAME = "Light Air";
